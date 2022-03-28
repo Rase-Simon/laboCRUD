@@ -1,0 +1,9 @@
+<nav>
+    <ul>
+        <li *ngFor="let onglet of onglets">
+            <a [routerLink]="onglet.url" [queryParams]="onglet.queryParams">
+                {{onglet.title}}
+            </a>
+        </li>
+    </ul>
+</nav>

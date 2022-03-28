@@ -1,0 +1,26 @@
+<h2>Bienvenue à l'entrainement au parc Safari !</h2>
+
+<div *ngIf="_login.logged==false">
+    <h4>Veuillez vous connecter: </h4>
+    <label for="pseudo">Pseudo: </label>
+    <input type="text" id="pseudo" [(ngModel)]="pseudonyme">
+    <label for="mdp">Mot de passe: </label>
+    <input type="password" id="mdp" [(ngModel)]="motdepasse">    
+    <input type="button" value="Se connecter" (click)="login()">
+</div>
+
+<div *ngIf="_login.logged==true">
+    <p>Connecté en tant que {{_login.pseudo}}</p>
+    <p>Que souhaitez-vous faire ?</p>
+    <ul>
+        <a *ngFor="let onglet of onglets" [routerLink]="onglet.url">
+            <ng-container *ngIf="!_login.adminLogged; else adminLogged">
+                <li *ngIf="!onglet.isAdminFunction">{{onglet.title}}</li>
+            </ng-container>
+            <ng-template #adminLogged>
+                <li>{{onglet.title}}</li>
+            </ng-template>
+        </a>
+    </ul>
+</div>
+
