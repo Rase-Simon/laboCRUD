@@ -1,1 +1,15 @@
-<p>delete works!</p>
+<h3>Suppression d'un pokémon de la liste</h3>
+<div *ngIf="!detailsgot; else update">
+    <h3>Veuillez entrer l'identifiant du pokémon à supprimer</h3>
+    <input type="number" [(ngModel)]="poke_id">
+    <button (click)="getOnePoke()">Rechercher</button>
+</div>
+
+<ng-template #update>
+    <p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+    <h4>Numéro {{pokedetails.id}}: {{pokedetails.name}}</h4>
+    <img src="{{pokedetails.sprite}}">
+    <p>Taux de capture: {{pokedetails.capture_rate}}</p>
+    <input type="button" (click)="deletePoke()" value="Oui" />
+    <input type="button" value="Non" [routerLink]="" />
+</ng-template>

@@ -1,6 +1,6 @@
 <h3>Modification d'un pokémon de la liste</h3>
 <div *ngIf="!detailsgot; else update">
-    <h3>Veuillez entrer l'identifiant du pokémon à afficher</h3>
+    <h3>Veuillez entrer l'identifiant du pokémon à modifier</h3>
     <input type="number" [(ngModel)]="poke_id">
     <button (click)="getOnePoke()">Rechercher</button>
 </div>

@@ -28,11 +28,6 @@
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
     },
     {
-      "id": 6,
-      "name": "dracaufeu",
-      "capture_rate": 45
-    },
-    {
       "id": 7,
       "name": "carapuce",
       "capture_rate": 45
@@ -183,6 +178,12 @@
       "name": "mélodelfe",
       "capture_rate": 25,
       "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png"
+    },
+    {
+      "id": 6,
+      "name": "dracaufeu",
+      "capture_rate": 45,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
     }
   ]
 }

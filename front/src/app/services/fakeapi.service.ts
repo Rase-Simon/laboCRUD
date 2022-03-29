@@ -15,6 +15,7 @@ export class FakeapiService {
 
   getAllPoke(): Observable<Poke[]> {
     return this._http.get<Poke[]>(this.apiUrl+'pokemons')
+    .pipe(map(d => this._toPokeList(d)))
   }
 
   getOnePoke(id: number): Observable<Poke> {
@@ -46,7 +47,21 @@ export class FakeapiService {
 
     return this._http.put(this.apiUrl+'pokemons/' + id, JSON.stringify(updatedPoke), {'headers': headers})
   }
+
+  public deletePoke(id: number): Observable<unknown> {
+    console.log("delete service")
+    return this._http.delete(this.apiUrl + 'pokemons/' + id)
+  }
   
+  public _toPokeList(data: Poke[]): Poke[] {
+    let result: Poke[] = []
+
+    data.forEach(
+      poke => result.push(new Poke(poke.id, poke.name, poke.capture_rate))
+    )
+
+    return result
+  }
 
   public _toPoke(data: Poke): Poke {
     let result: Poke = new Poke(data.id, data.name, data.capture_rate)
