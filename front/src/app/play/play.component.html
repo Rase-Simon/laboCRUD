@@ -1,1 +1,14 @@
-<p>play works!</p>
+<div *ngIf="!combatactif">
+    <p>{{message}}</p>
+    <input type="button" (click)="search()" value="Chercher un pokémon" />
+</div>
+
+<div *ngIf="combatactif">
+    <img src="{{pokesauvage.sprite}}">
+    <p>{{message}}</p>
+    <input type="button" (click)="attraper()" value="Lancer une ball" />
+    <input type="button" (click)="appater()" value="Lancer un appât" />
+    <input type="button" (click)="caillasser()" value="Lancer un caillou" />
+    <input type="button" (click)="fuir()" value="Prendre la fuite" />
+</div>
+
