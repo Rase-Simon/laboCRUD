@@ -1,1 +1,10 @@
-<p>update works!</p>
+<h3>Modification d'un pokémon de la liste</h3>
+<form [formGroup]="updateForm" (ngSubmit)="updatePoke()">
+    <label for="id">Capture rate</label>
+    <input type="number" id="id" formControlName="pokeid" />
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="pokename" />
+    <label for="capture_rate">Capture rate</label>
+    <input type="number" id="capture_rate" formControlName="pokerate" />
+    <input type="submit" value="Confirmer modification" />
+</form>

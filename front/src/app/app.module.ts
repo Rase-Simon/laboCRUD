@@ -12,6 +12,7 @@ import { GetAllComponent } from './get-all/get-all.component';
 import { GetDetailsComponent } from './get-details/get-details.component';
 import { PlayComponent } from './play/play.component';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
