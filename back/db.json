@@ -3,7 +3,8 @@
     {
       "id": 1,
       "name": "bulbizarre",
-      "capture_rate": 45
+      "capture_rate": 45,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
     },
     {
       "id": 2,
@@ -23,7 +24,8 @@
     {
       "id": 5,
       "name": "reptincel",
-      "capture_rate": 45
+      "capture_rate": 45,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
     },
     {
       "id": 6,
@@ -153,7 +155,8 @@
     {
       "id": 31,
       "name": "nidoqueen",
-      "capture_rate": 45
+      "capture_rate": 45,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png"
     },
     {
       "id": 32,
@@ -174,6 +177,12 @@
       "id": 35,
       "name": "Mélofée",
       "capture_rate": 150
+    },
+    {
+      "id": 36,
+      "name": "mélodelfe",
+      "capture_rate": 25,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png"
     }
   ]
 }

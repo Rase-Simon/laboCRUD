@@ -1,1 +1,11 @@
-<p>get-details works!</p>
+<div *ngIf="!detailsgot; else details">
+    <h3>Veuillez entrer l'identifiant du pokémon à afficher</h3>
+    <input type="number" [(ngModel)]="pokeid">
+    <button (click)="getOnePoke()">Rechercher</button>
+</div>
+
+<ng-template #details>
+    <h4>Numéro {{pokedetails.id}}: {{pokedetails.name}}</h4>
+    <img src="{{pokedetails.sprite}}">
+    <p>Taux de capture: {{pokedetails.capture_rate}}</p>
+</ng-template>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Poke } from '../models/poke';
 
 @Injectable({
@@ -17,32 +17,39 @@ export class FakeapiService {
     return this._http.get<Poke[]>(this.apiUrl+'pokemons')
   }
 
+  getOnePoke(id: number): Observable<Poke> {
+    return this._http.get<Poke>(this.apiUrl+'pokemons/'+(id))
+    .pipe(map(d => this._toPoke(d)))
+  }
+
   addPoke(newPokeForm: FormGroup): Observable<any> {
-    let newPoke : Poke =
-    {
-      id: newPokeForm.get('pokeid')?.value,
-      name: newPokeForm.get('pokename')?.value,
-      capture_rate: newPokeForm.get('pokerate')?.value
-    }
+    let newPoke : Poke = new Poke(
+      newPokeForm.get('pokeid')?.value,
+      newPokeForm.get('pokename')?.value,
+      newPokeForm.get('pokerate')?.value
+      )
     
     const headers = { 'content-type': 'application/json'}  
 
     return this._http.post(this.apiUrl+'pokemons', JSON.stringify(newPoke), {'headers': headers})
   }
   
-  /*
-  updatePoke(newPokeForm: FormGroup): Observable<any> {
-    console.log("addPoke service")
-    let updatedPoke : Poke =
-    {
-      id: newPokeForm.get('pokeid')?.value,
-      name: newPokeForm.get('pokename')?.value,
-      capture_rate: newPokeForm.get('pokerate')?.value
-    }
+  
+  updatePoke(id: number, updatedPokeForm: FormGroup): Observable<any> {
+    let updatedPoke : Poke = new Poke(
+      id,
+      updatedPokeForm.get('pokename')?.value,
+      updatedPokeForm.get('pokerate')?.value
+    )
     
     const headers = { 'content-type': 'application/json'}  
 
-    return this._http.put(this.apiUrl+'pokemons', JSON.stringify(updatedPoke), {'headers': headers})
+    return this._http.put(this.apiUrl+'pokemons/' + id, JSON.stringify(updatedPoke), {'headers': headers})
   }
-  */
+  
+
+  public _toPoke(data: Poke): Poke {
+    let result: Poke = new Poke(data.id, data.name, data.capture_rate)
+    return result
+  }
 }
