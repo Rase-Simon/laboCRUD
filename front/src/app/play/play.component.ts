@@ -14,6 +14,8 @@ export class PlayComponent implements OnInit {
   public catchrate!: number
   public flyrate!: number
   public message: string = "Aucun pokémon à l'horizon"
+  public timeout: any
+  public timeouttime: number = 1000
 
   constructor(private _api : FakeapiService) { }
 
@@ -21,14 +23,14 @@ export class PlayComponent implements OnInit {
   }
 
   public search() {
-    this._api.getOnePoke(Math.floor(Math.random()*35+1))
+    this._api.getOnePoke(Math.floor(Math.random()*150+1))
     .subscribe({
       next: (data) =>
       {
         this.pokesauvage = data
         this.combatactif = true
         this.catchrate = this.pokesauvage.capture_rate
-        this.flyrate = 125
+        this.flyrate = 50
         this.message = `Oh, un ${this.pokesauvage.name} sauvage apparait!`
       }
     })
@@ -40,6 +42,8 @@ export class PlayComponent implements OnInit {
 
     let rand = Math.floor(Math.random()*65535)
 
+    this.message = `Vous tentez d'attraper le ${this.pokesauvage.name} sauvage`
+
     let i = 0
     while(i<4 && rand<=uppercatchlimit)
     {
@@ -47,38 +51,54 @@ export class PlayComponent implements OnInit {
       rand = Math.random()*65535
     }
 
-    switch(i)
+    this.timeout = setTimeout(() =>
     {
-      case 0:
-        this.message = "Oh non, le pokémon s'est libéré"
-        break;
-      case 1:
-        this.message = "Rhaaa, ça y était presque!"
-        break;
-      case 2:
-        this.message = "Zut, il est sorti!"
-        break;
-      case 3:
-        this.message = "Dommage, encore raté"
-        break;
-      case 4:
-        this.message = `Félicitations, le ${this.pokesauvage.name} sauvage est attrapé!`
-        this.combatactif = false
-        break;
-    }
+      switch(i)
+      {
+        case 0:
+          this.message = "Oh non, le pokémon s'est libéré"
+          this.timeout = setTimeout(() =>
+          {this.flyingpoke()}, this.timeouttime)
+          break;
+        case 1:
+          this.message = "Rhaaa, ça y était presque!"
+          this.timeout = setTimeout(() =>
+          {this.flyingpoke()}, this.timeouttime)
+          break;
+        case 2:
+          this.message = "Zut, il est sorti!"
+          this.timeout = setTimeout(() =>
+          {this.flyingpoke()}, this.timeouttime)
+          break;
+        case 3:
+          this.message = "Dommage, encore raté"
+          this.timeout = setTimeout(() =>
+          {this.flyingpoke()}, this.timeouttime)
+          break;
+        case 4:
+          this.message = `Félicitations, le ${this.pokesauvage.name} sauvage est attrapé!`
+          this.combatactif = false
+          break;
+      }
+    }, this.timeouttime)
+    
 
   }
 
   public appater() {
-    this.flyrate*=0.8
-    this.catchrate*=0.8
-    this.flyingpoke()
+    this.flyrate*=0.9
+    this.catchrate*=0.9
+    this.message = `Vous lancez un appât sur le ${this.pokesauvage.name} sauvage`
+    this.timeout = setTimeout(() =>
+    {this.flyingpoke()}, this.timeouttime)
   }
 
   public caillasser() {
-    this.flyrate*=1.2
-    this.catchrate*=1.2
-    this.flyingpoke()
+    this.flyrate*=1.1
+    this.catchrate*=1.1
+    this.message = `Vous lancez un caillou sur le ${this.pokesauvage.name} sauvage`
+    this.timeout = setTimeout(() =>
+    {this.flyingpoke()}, this.timeouttime)
   }
 
   public fuir() {
@@ -88,11 +108,16 @@ export class PlayComponent implements OnInit {
 
   public flyingpoke() {
     let rand = Math.random()*255
-    if(rand > this.flyrate)
+    if(rand < this.flyrate)
     {
       this.message = `Le ${this.pokesauvage.name} sauvage s'est enfui...`
       this.combatactif = false
     }
+    else
+    {
+      this.message = `Le ${this.pokesauvage.name} sauvage observe attentivement...`
+    }
+
   }
 
 }

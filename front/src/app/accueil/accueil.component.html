@@ -7,6 +7,7 @@
     <label for="mdp">Mot de passe: </label>
     <input type="password" id="mdp" [(ngModel)]="motdepasse">    
     <input type="button" value="Se connecter" (click)="login()">
+    <p *ngIf="loginerror">Erreur lors de l'identification</p>
 </div>
 
 <div *ngIf="_login.logged==true">

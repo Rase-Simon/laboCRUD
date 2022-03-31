@@ -11,18 +11,41 @@ export class LoginService {
 
   constructor() { }
 
-  public login(pseudo: string, mdp: string) {
-    if(pseudo=="admin" && mdp=="admin")
-    {
-      this.adminLogged = true
-    }
-    this.logged = true
-    this.pseudo = pseudo
+  public login(pseudo: string, mdp: string): boolean {
 
+    let loginerror = this.checkAdmin(pseudo, mdp)
+
+    if(!loginerror)
+    {
+      this.logged = true
+      this.pseudo = pseudo
+    }
+
+    return loginerror
   }
 
   public logout() {
     this.logged = false
     this.adminLogged = false
   }
+
+  public checkAdmin(pseudo: string, mdp: string): boolean {
+  let loginerror = false
+  if(pseudo=="admin")
+  {
+    if(mdp=="adminMDP")
+    {
+      this.adminLogged = true
+    }
+    else
+    {
+      loginerror = true
+    }
+
+  }
+
+  return loginerror
 }
+
+}
+

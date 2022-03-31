@@ -11,6 +11,7 @@ export class AccueilComponent implements OnInit {
 
   public pseudonyme: string = ""
   public motdepasse: string = ""
+  public loginerror: boolean = false
 
   public onglets: Link[] =
   [
@@ -54,6 +55,6 @@ export class AccueilComponent implements OnInit {
 
 
   public login() {
-    this._login.login(this.pseudonyme, this.motdepasse)
+    this.loginerror = this._login.login(this.pseudonyme, this.motdepasse)
   }
 }
